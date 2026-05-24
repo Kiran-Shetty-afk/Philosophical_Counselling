@@ -33,7 +33,7 @@ export default function FamilyCounsellingPage() {
         title="Make space for a better conversation"
         description="When families feel stuck, reflective dialogue can create new understanding without turning the process into a battle."
         primaryLabel="Enquire About Family Sessions"
-        primaryHref="/contact"
+        primaryHref="/book-session"
       />
     </>
   );

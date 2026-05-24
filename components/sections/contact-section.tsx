@@ -26,16 +26,16 @@ export function ContactSection() {
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                href="mailto:hello@benna-philosophy.com"
+                href="/book-session"
                 className={cn(buttonVariants({ size: "lg" }))}
               >
-                Send an Enquiry
+                Request a Session
               </a>
               <a
-                href="#services"
+                href="/contact"
                 className={cn(buttonVariants({ variant: "secondary", size: "lg" }))}
               >
-                See Session Options
+                Send an Enquiry
               </a>
             </div>
           </div>

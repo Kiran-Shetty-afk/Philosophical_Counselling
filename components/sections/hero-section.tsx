@@ -28,14 +28,14 @@ export function HeroSection() {
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a
-              href="#contact"
+              href="/book-session"
               className={cn(buttonVariants({ size: "lg" }))}
             >
               Book Your Session
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
             <a
-              href="#approach"
+              href="/about"
               className={cn(buttonVariants({ variant: "secondary", size: "lg" }))}
             >
               Explore Our Approach

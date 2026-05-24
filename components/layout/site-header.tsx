@@ -28,7 +28,7 @@ export function SiteHeader() {
         </nav>
 
         <Link
-          href="/contact"
+          href="/book-session"
           className="hidden rounded-full border border-[var(--color-border-strong)] bg-white/85 px-5 py-2.5 text-sm font-semibold text-[var(--color-text-primary)] transition hover:-translate-y-0.5 hover:border-[var(--color-accent)] lg:inline-flex"
         >
           Book a Session

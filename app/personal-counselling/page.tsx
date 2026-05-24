@@ -34,7 +34,7 @@ export default function PersonalCounsellingPage() {
         title="Ready for a steadier way forward?"
         description="A first session can help us understand what kind of support would be most useful for you."
         primaryLabel="Request a Personal Session"
-        primaryHref="/contact"
+        primaryHref="/book-session"
       />
     </>
   );

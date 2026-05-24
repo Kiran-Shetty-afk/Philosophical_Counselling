@@ -18,7 +18,7 @@ export default function HomePage() {
         title="Thoughtful guidance starts with one honest conversation"
         description="Whether you are seeking personal clarity or healthier family dialogue, the practice begins with careful listening and a steady first step."
         primaryLabel="Contact the Practice"
-        primaryHref="/contact"
+        primaryHref="/book-session"
         secondaryLabel="Meet the Counsellor"
         secondaryHref="/counsellor"
       />

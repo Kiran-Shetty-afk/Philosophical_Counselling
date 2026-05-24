@@ -8,6 +8,7 @@ export const siteConfig = {
     { label: "About", href: "/about" },
     { label: "Personal", href: "/personal-counselling" },
     { label: "Family", href: "/family-counselling" },
+    { label: "Book", href: "/book-session" },
     { label: "Resources", href: "/resources" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
@@ -141,3 +142,58 @@ export const counsellorProfile = {
     "Values-based decision making",
   ],
 } as const;
+
+export const appointmentServices = [
+  {
+    value: "personal",
+    label: "Personal Counselling",
+    description: "For identity questions, life transitions, burnout, and decision clarity.",
+  },
+  {
+    value: "family",
+    label: "Family Counselling",
+    description: "For family communication, tension, and shared values work.",
+  },
+  {
+    value: "meaning",
+    label: "Meaning and Direction Session",
+    description: "For purpose, uncertainty, and deeper reflective questions.",
+  },
+] as const;
+
+export const sessionPackages = [
+  {
+    name: "Single Session",
+    price: "$120",
+    note: "A focused 60-minute conversation for immediate clarity.",
+  },
+  {
+    name: "5-Session Path",
+    price: "$560",
+    note: "Ideal for sustained reflection and meaningful forward movement.",
+  },
+  {
+    name: "10-Session Deep Work",
+    price: "$1,050",
+    note: "Best for layered personal work, family dialogue, or long transitions.",
+  },
+] as const;
+
+export const appointmentSlots = [
+  {
+    day: "Monday",
+    times: ["09:00 AM", "11:30 AM", "03:00 PM"],
+  },
+  {
+    day: "Wednesday",
+    times: ["10:00 AM", "01:00 PM", "05:30 PM"],
+  },
+  {
+    day: "Friday",
+    times: ["09:30 AM", "12:00 PM", "04:00 PM"],
+  },
+  {
+    day: "Saturday",
+    times: ["10:00 AM", "12:30 PM"],
+  },
+] as const;
