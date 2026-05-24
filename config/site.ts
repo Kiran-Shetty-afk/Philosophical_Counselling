@@ -9,6 +9,7 @@ export const siteConfig = {
     { label: "Personal", href: "/personal-counselling" },
     { label: "Family", href: "/family-counselling" },
     { label: "Book", href: "/book-session" },
+    { label: "Blog", href: "/blog" },
     { label: "Resources", href: "/resources" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },

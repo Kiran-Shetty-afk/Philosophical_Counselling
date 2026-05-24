@@ -19,8 +19,8 @@ export default function HomePage() {
         description="Whether you are seeking personal clarity or healthier family dialogue, the practice begins with careful listening and a steady first step."
         primaryLabel="Contact the Practice"
         primaryHref="/book-session"
-        secondaryLabel="Meet the Counsellor"
-        secondaryHref="/counsellor"
+        secondaryLabel="Read the Blog"
+        secondaryHref="/blog"
       />
       <ContactSection />
     </>
