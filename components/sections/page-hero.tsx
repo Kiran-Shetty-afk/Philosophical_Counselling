@@ -11,7 +11,7 @@ export function PageHero({ eyebrow, title, description }: PageHeroProps) {
         <span className="inline-flex rounded-full border border-[var(--color-border)] bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-text-secondary)]">
           {eyebrow}
         </span>
-        <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-5xl lg:text-6xl">
+        <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight text-[var(--color-text-primary)] sm:text-5xl lg:text-6xl">
           {title}
         </h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-[var(--color-text-secondary)] sm:text-xl">

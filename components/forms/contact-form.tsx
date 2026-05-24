@@ -115,7 +115,7 @@ export function ContactForm() {
         </div>
 
         {isSubmitted ? (
-          <div className="flex items-start gap-3 rounded-[1.5rem] border border-[rgba(76,175,80,0.24)] bg-[rgba(76,175,80,0.08)] px-5 py-4 text-sm text-[var(--color-text-primary)]">
+          <div className="flex items-start gap-3 rounded-[1.5rem] border border-[rgba(217,119,6,0.22)] bg-[rgba(255,152,0,0.08)] px-5 py-4 text-sm text-[var(--color-text-primary)]">
             <MailCheck className="mt-0.5 h-5 w-5 text-[var(--color-success)]" />
             <p>
               Thanks for reaching out. Your enquiry has been captured in the UI
