@@ -2,7 +2,17 @@ import Link from "next/link";
 
 import { LoginForm } from "@/components/forms/login-form";
 
-export default function AdminLoginPage() {
+type AdminLoginPageProps = {
+  searchParams: Promise<{
+    next?: string;
+  }>;
+};
+
+export default async function AdminLoginPage({
+  searchParams,
+}: AdminLoginPageProps) {
+  const params = await searchParams;
+
   return (
     <section className="min-h-screen bg-[linear-gradient(180deg,#f7f4ec_0%,#f5efe4_100%)] px-5 py-16 sm:px-8 lg:px-10">
       <div className="mx-auto grid w-full max-w-5xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
@@ -33,8 +43,19 @@ export default function AdminLoginPage() {
           <p className="mt-3 text-base leading-8 text-[var(--color-text-secondary)]">
             Use the admin interface to manage content and practice operations from one controlled workspace.
           </p>
+          <div className="mt-6 rounded-[1.25rem] border border-[var(--color-border)] bg-[var(--color-surface-muted)] px-4 py-4 text-sm leading-7 text-[var(--color-text-secondary)]">
+            Demo admin credentials:
+            <br />
+            <span className="font-semibold text-[var(--color-text-primary)]">
+              admin@benna-philosophy.com
+            </span>
+            <br />
+            <span className="font-semibold text-[var(--color-text-primary)]">
+              Admin@12345
+            </span>
+          </div>
           <div className="mt-8">
-            <LoginForm />
+            <LoginForm nextPath={params.next} />
           </div>
         </div>
       </div>

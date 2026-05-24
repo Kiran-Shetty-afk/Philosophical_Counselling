@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LogOut } from "lucide-react";
 
 import { adminNavItems } from "@/lib/admin";
 
@@ -47,6 +48,13 @@ export function AdminShell({
               can connect here next without reworking the structure.
             </p>
           </div>
+
+          <form action="/api/auth/logout" className="mt-6" method="post">
+            <button className="inline-flex w-full items-center justify-center rounded-full border border-[var(--color-border-strong)] bg-white px-4 py-3 text-sm font-semibold text-[var(--color-text-primary)] transition hover:-translate-y-0.5 hover:border-[var(--color-accent)]">
+              <LogOut className="mr-2 h-4 w-4" />
+              Sign out
+            </button>
+          </form>
         </aside>
 
         <section className="rounded-[2rem] border border-[var(--color-border)] bg-white/92 p-8 shadow-[0_24px_60px_rgba(44,62,80,0.08)] sm:p-10">
