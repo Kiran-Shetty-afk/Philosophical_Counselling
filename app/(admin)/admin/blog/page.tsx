@@ -1,7 +1,7 @@
 import Link from "next/link";
 
+import { BlogManager } from "@/components/admin/blog-manager";
 import { AdminShell } from "@/components/admin/admin-shell";
-import { AdminTable } from "@/components/admin/admin-table";
 import { getAllBlogPosts } from "@/lib/blog";
 
 export default function AdminBlogPage() {
@@ -29,16 +29,7 @@ export default function AdminBlogPage() {
         </Link>
       </div>
 
-      <AdminTable
-        columns={["Title", "Category", "Published", "Read Time", "Featured"]}
-        rows={posts.map((post) => [
-          post.title,
-          post.category,
-          post.publishedAt,
-          post.readTime,
-          post.featured ? "Yes" : "No",
-        ])}
-      />
+      <BlogManager initialPosts={posts} />
     </AdminShell>
   );
 }
