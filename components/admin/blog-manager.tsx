@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Plus, Trash2 } from "lucide-react";
 
 import { StatusBadge } from "@/components/admin/status-badge";
 import { Button } from "@/components/ui/button";
@@ -31,7 +32,10 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
     [posts, selectedSlug],
   );
 
-  function updateSelected(field: keyof EditablePost, value: string | boolean) {
+  function updateSelected(
+    field: keyof EditablePost,
+    value: string | boolean | string[],
+  ) {
     if (!selectedPost) {
       return;
     }
@@ -55,6 +59,42 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
           : post,
       ),
     );
+  }
+
+  function createNewPost() {
+    const timestamp = Date.now().toString().slice(-6);
+    const newPost: EditablePost = {
+      slug: `new-reflection-${timestamp}`,
+      title: "Untitled Reflection",
+      excerpt: "Add a short summary for this new post.",
+      category: "Reflections",
+      publishedAt: new Date().toISOString().slice(0, 10),
+      readTime: "4 min read",
+      author: "Dr. Benna",
+      featured: false,
+      status: "Draft",
+      tags: ["new-post"],
+      coverImage: "/images/blog/clarity.svg",
+      coverAlt: "Abstract cover image for a new reflective article.",
+      youtubeUrl: "",
+      youtubeTitle: "",
+      content: ["Start writing the article here."],
+    };
+
+    setPosts((current) => [newPost, ...current]);
+    setSelectedSlug(newPost.slug);
+    setFlashMessage("New draft post created.");
+  }
+
+  function deleteSelectedPost() {
+    if (!selectedPost) {
+      return;
+    }
+
+    const remainingPosts = posts.filter((post) => post.slug !== selectedPost.slug);
+    setPosts(remainingPosts);
+    setSelectedSlug(remainingPosts[0]?.slug ?? "");
+    setFlashMessage(`Post "${selectedPost.title}" removed from the editor list.`);
   }
 
   function saveAsDraft() {
@@ -93,7 +133,16 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
           <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
             Posts
           </h3>
-          <StatusBadge label={`${posts.length} total`} tone="neutral" />
+          <div className="flex items-center gap-3">
+            <StatusBadge label={`${posts.length} total`} tone="neutral" />
+            <button
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-strong)] bg-white text-[var(--color-text-primary)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+              onClick={createNewPost}
+              type="button"
+            >
+              <Plus className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         <div className="mt-5 grid gap-3">
@@ -137,6 +186,9 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
           </div>
 
           <div className="flex flex-wrap gap-3">
+            <Button onClick={createNewPost} variant="ghost">
+              New post
+            </Button>
             <Button onClick={saveAsDraft} variant="secondary">
               Save draft
             </Button>
@@ -145,6 +197,14 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
             </Button>
             <Button onClick={toggleFeatured} variant="ghost">
               Toggle featured
+            </Button>
+            <Button
+              className="border-[rgba(217,119,6,0.28)] text-[#b45309] hover:border-[#b45309]"
+              onClick={deleteSelectedPost}
+              variant="secondary"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete
             </Button>
           </div>
         </div>
@@ -169,6 +229,15 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
           <div className="grid gap-5 md:grid-cols-3">
             <label className="grid gap-2">
               <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                Slug
+              </span>
+              <Input
+                value={selectedPost.slug}
+                onChange={(event) => updateSelected("slug", event.target.value)}
+              />
+            </label>
+            <label className="grid gap-2">
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
                 Category
               </span>
               <Input
@@ -178,6 +247,18 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
                 }
               />
             </label>
+            <label className="grid gap-2">
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                Author
+              </span>
+              <Input
+                value={selectedPost.author}
+                onChange={(event) => updateSelected("author", event.target.value)}
+              />
+            </label>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
             <label className="grid gap-2">
               <span className="text-sm font-semibold text-[var(--color-text-primary)]">
                 Published date
@@ -264,6 +345,25 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
               />
             </label>
           </div>
+
+          <label className="grid gap-2">
+            <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+              Tags
+            </span>
+            <Input
+              placeholder="clarity, reflection, meaning"
+              value={selectedPost.tags.join(", ")}
+              onChange={(event) =>
+                updateSelected(
+                  "tags",
+                  event.target.value
+                    .split(",")
+                    .map((tag) => tag.trim())
+                    .filter(Boolean),
+                )
+              }
+            />
+          </label>
 
           <label className="grid gap-2">
             <span className="text-sm font-semibold text-[var(--color-text-primary)]">
