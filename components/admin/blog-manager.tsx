@@ -213,6 +213,58 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
             />
           </label>
 
+          <div className="grid gap-5 md:grid-cols-2">
+            <label className="grid gap-2">
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                Cover image path
+              </span>
+              <Input
+                value={selectedPost.coverImage}
+                onChange={(event) =>
+                  updateSelected("coverImage", event.target.value)
+                }
+              />
+            </label>
+            <label className="grid gap-2">
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                Cover image alt text
+              </span>
+              <Input
+                value={selectedPost.coverAlt}
+                onChange={(event) =>
+                  updateSelected("coverAlt", event.target.value)
+                }
+              />
+            </label>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            <label className="grid gap-2">
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                YouTube URL
+              </span>
+              <Input
+                placeholder="https://www.youtube.com/watch?v=..."
+                value={selectedPost.youtubeUrl ?? ""}
+                onChange={(event) =>
+                  updateSelected("youtubeUrl", event.target.value)
+                }
+              />
+            </label>
+            <label className="grid gap-2">
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                Video title
+              </span>
+              <Input
+                placeholder="Reflective introduction video"
+                value={selectedPost.youtubeTitle ?? ""}
+                onChange={(event) =>
+                  updateSelected("youtubeTitle", event.target.value)
+                }
+              />
+            </label>
+          </div>
+
           <label className="grid gap-2">
             <span className="text-sm font-semibold text-[var(--color-text-primary)]">
               Body content

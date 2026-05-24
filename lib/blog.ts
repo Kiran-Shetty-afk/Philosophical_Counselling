@@ -8,6 +8,10 @@ export type BlogPost = {
   author: string;
   featured: boolean;
   tags: string[];
+  coverImage: string;
+  coverAlt: string;
+  youtubeUrl?: string;
+  youtubeTitle?: string;
   content: string[];
 };
 
@@ -23,6 +27,10 @@ export const blogPosts: BlogPost[] = [
     author: "Dr. Benna",
     featured: true,
     tags: ["clarity", "reflection", "decision-making"],
+    coverImage: "/images/blog/clarity.svg",
+    coverAlt: "Warm abstract illustration representing reflective clarity and insight.",
+    youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    youtubeTitle: "Reflective introduction to finding clarity",
     content: [
       "Clarity rarely arrives through urgency. More often, it grows when we slow down enough to notice the ideas, fears, and inherited expectations that are quietly steering us.",
       "Philosophical counselling creates that slower space. Rather than rushing toward advice, it helps uncover the assumptions beneath a dilemma: What am I calling success? Which values are actually mine? What fear is shaping this decision?",
@@ -42,6 +50,10 @@ export const blogPosts: BlogPost[] = [
     author: "Dr. Benna",
     featured: false,
     tags: ["family", "communication", "conflict"],
+    coverImage: "/images/blog/family-dialogue.svg",
+    coverAlt: "Abstract illustration symbolizing family dialogue and warmer communication.",
+    youtubeUrl: "https://www.youtube.com/watch?v=3fumBcKC6RE",
+    youtubeTitle: "Thinking about family conversations with care",
     content: [
       "Many family conflicts repeat not because the topic is impossible, but because the conversation itself has become patterned. People speak from defense, memory, or frustration before they speak from understanding.",
       "A philosophical counselling lens helps families examine the meanings driving those reactions. What counts as respect in this family? Which expectations are spoken, and which are assumed? When does care become control?",
@@ -60,6 +72,8 @@ export const blogPosts: BlogPost[] = [
     author: "Dr. Benna",
     featured: false,
     tags: ["burnout", "meaning", "wellbeing"],
+    coverImage: "/images/blog/burnout-recovery.svg",
+    coverAlt: "Abstract sunrise illustration representing recovery, warmth, and meaning.",
     content: [
       "Burnout is often described in terms of exhaustion, but exhaustion is only the visible layer. Underneath it, many people are carrying a crisis of meaning, pressure, and self-relationship.",
       "When work or caregiving becomes totalizing, people can lose contact with why they began, what matters now, and what counts as enough. Without those anchors, effort becomes endless and rest becomes guilt-ridden.",
@@ -82,4 +96,34 @@ export function getFeaturedBlogPost() {
 
 export function getBlogPostBySlug(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+export function getYouTubeEmbedUrl(url?: string) {
+  if (!url) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(url);
+
+    if (parsed.hostname.includes("youtu.be")) {
+      const id = parsed.pathname.replace("/", "");
+      return id ? `https://www.youtube.com/embed/${id}` : null;
+    }
+
+    if (parsed.hostname.includes("youtube.com")) {
+      const id = parsed.searchParams.get("v");
+      if (id) {
+        return `https://www.youtube.com/embed/${id}`;
+      }
+
+      if (parsed.pathname.startsWith("/embed/")) {
+        return `https://www.youtube.com${parsed.pathname}`;
+      }
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
 }
