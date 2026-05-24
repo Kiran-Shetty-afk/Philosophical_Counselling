@@ -17,22 +17,22 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-7 lg:flex">
           {siteConfig.navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="text-sm font-medium text-[var(--color-text-secondary)] transition hover:text-[var(--color-text-primary)]"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a
-          href="#contact"
+        <Link
+          href="/contact"
           className="hidden rounded-full border border-[var(--color-border-strong)] bg-white/85 px-5 py-2.5 text-sm font-semibold text-[var(--color-text-primary)] transition hover:-translate-y-0.5 hover:border-[var(--color-accent)] lg:inline-flex"
         >
           Book a Session
-        </a>
+        </Link>
       </div>
     </header>
   );

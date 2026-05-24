@@ -4,11 +4,13 @@ export const siteConfig = {
     "A modern philosophical counselling practice helping people find clarity, resilience, and meaning through reflective conversation.",
   url: "https://github.com/Kiran-Shetty-afk/Philosophical_Counselling",
   navItems: [
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Approach", href: "#approach" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Personal", href: "/personal-counselling" },
+    { label: "Family", href: "/family-counselling" },
+    { label: "Resources", href: "/resources" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Contact", href: "/contact" },
   ],
 } as const;
 
@@ -83,3 +85,59 @@ export const wisdomQuotes = [
     author: "Friedrich Nietzsche",
   },
 ] as const;
+
+export const faqs = [
+  {
+    question: "What is philosophical counselling?",
+    answer:
+      "It is a reflective conversation that brings philosophical insight into real personal and relational concerns, helping you understand your values, assumptions, and choices with greater clarity.",
+  },
+  {
+    question: "Is it the same as therapy?",
+    answer:
+      "There can be overlap in care and depth, but philosophical counselling is especially centered on meaning, ethics, perspective, and the way we interpret our lives and decisions.",
+  },
+  {
+    question: "Who is it for?",
+    answer:
+      "It is often helpful for people navigating transitions, identity questions, relationship strain, indecision, burnout, or a desire for more intentional living.",
+  },
+] as const;
+
+export const resources = [
+  {
+    title: "Stoicism for Daily Resilience",
+    description:
+      "Practical reflections on discipline, acceptance, and inner steadiness for uncertain seasons.",
+    category: "Stoicism",
+  },
+  {
+    title: "Existentialism and Meaning",
+    description:
+      "A guided starting point for questions of freedom, responsibility, and purpose.",
+    category: "Existentialism",
+  },
+  {
+    title: "Family Dialogue Prompts",
+    description:
+      "Conversation starters that help families speak with more honesty, patience, and mutual respect.",
+    category: "Relationships",
+  },
+] as const;
+
+export const counsellorProfile = {
+  name: "Dr. Benna",
+  role: "Philosophical Counsellor",
+  bio: "Benna works with people seeking clarity, steadiness, and a more meaningful way to navigate life’s complexity. The practice blends careful listening, philosophical reflection, and humane practical insight.",
+  qualifications: [
+    "MA in Philosophy",
+    "Certified Counselling Practitioner",
+    "Training in reflective dialogue and family conversations",
+  ],
+  specializations: [
+    "Meaning and direction",
+    "Personal transitions",
+    "Family dynamics",
+    "Values-based decision making",
+  ],
+} as const;
