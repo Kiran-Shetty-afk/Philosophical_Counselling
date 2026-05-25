@@ -100,13 +100,14 @@ npm run build
 
 ---
 
-## Admin console — 6 pages (protected)
+## Admin console — 7 pages (protected)
 
 | Page | Description |
 |---|---|
 | `/admin/dashboard` | Metric cards with icons + trends, recent appointments, recent enquiries, quick actions |
 | `/admin/appointments` | Full appointment list with status filters, date filter, confirm/complete/cancel, admin notes |
 | `/admin/availability` | Set working days, hours, break times, session duration, buffer, holiday dates |
+| `/admin/wisdom` | Manage daily wisdom quotes — add, edit, delete, toggle active, pin featured |
 | `/admin/enquiries` | Status management with response drafts |
 | `/admin/blog` | Create, edit, draft, publish, featured toggle, delete |
 | `/admin/testimonials` | Approve / hold / reject moderation |
@@ -119,7 +120,10 @@ npm run build
 |---|---|---|
 | `/api/slots` | GET `?date=YYYY-MM-DD` | Returns all slots for a date with availability status |
 | `/api/appointments` | POST | Create booking — double-booking protected, server-validated |
-| `/api/contact` | POST | Submit contact enquiry |
+| `/api/daily-wisdom` | GET | Public — returns current daily quote. `?refresh=true&exclude=id` for random refresh |
+| `/api/daily-wisdom` | POST | Admin only — create a new wisdom quote |
+| `/api/daily-wisdom/[id]` | PATCH | Admin only — update quote fields |
+| `/api/daily-wisdom/[id]` | DELETE | Admin only — delete a quote |
 | `/api/auth/login` | POST | Admin login — sets HTTP-only session cookie |
 | `/api/auth/logout` | POST | Clears session cookie |
 | `/api/admin/appointments` | GET | All appointments (admin only) |
@@ -129,7 +133,52 @@ npm run build
 
 ---
 
-## Booking store architecture
+## Daily Wisdom system
+
+### How it works
+- 18 quotes seeded across 7 categories: Stoicism, Philosophy, Mindfulness, Self-Reflection, Motivation, Existentialism, Ethics
+- Server renders the initial quote at page load (no flash, no layout shift)
+- Client component handles animated fade transitions and refresh interactions
+
+### Selection logic
+1. **Featured quote** — if admin pins a quote as featured, it always shows
+2. **Daily deterministic** — otherwise, a quote is selected by day index (same quote all day for all visitors, changes at midnight UTC)
+3. **Refresh** — "New quote" button fetches a random active quote excluding the current one
+
+### Quote data structure
+```ts
+type WisdomQuote = {
+  id: string;
+  quote: string;
+  author: string;
+  source?: string;        // book / work title
+  category: WisdomCategory;
+  isActive: boolean;      // hidden from rotation when false
+  isFeatured: boolean;    // overrides random — only one can be featured
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Admin controls (`/admin/wisdom`)
+- Search by quote text or author
+- Filter by category (7 categories)
+- Filter by status: All / Active / Inactive / Featured
+- Pin/unpin featured (only one featured at a time — pinning a new one unpins the previous)
+- Toggle active/inactive per quote
+- Create new quotes with full form
+- Edit existing quotes inline
+- Delete quotes
+
+### Frontend UX
+- Animated fade-in/out transitions via Framer Motion `AnimatePresence`
+- "New quote" refresh button with loading spinner
+- Category badge with colour coding per category
+- Author attribution with optional source title
+- Decorative glow background matching site aesthetic
+- Fully responsive — mobile, tablet, desktop
+
+---
 
 `lib/booking-store.ts` — server-side in-memory singleton store.
 

@@ -7,6 +7,7 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ServicesSection } from "@/components/sections/services-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { WisdomSectionServer } from "@/components/sections/wisdom-section-server";
 
 export const metadata: Metadata = {
   title: "Benna Philosophical Counselling — Clarity, Meaning, and Reflective Living",
@@ -18,6 +19,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <WisdomSectionServer />
       <AboutSection />
       <ServicesSection />
       <ApproachSection />

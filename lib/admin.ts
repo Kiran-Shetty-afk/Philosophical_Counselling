@@ -93,6 +93,7 @@ export const adminNavItems = [
   { label: "Appointments", href: "/admin/appointments" },
   { label: "Availability", href: "/admin/availability" },
   { label: "Enquiries", href: "/admin/enquiries" },
+  { label: "Daily Wisdom", href: "/admin/wisdom" },
   { label: "Blog", href: "/admin/blog" },
   { label: "Testimonials", href: "/admin/testimonials" },
 ] as const;
