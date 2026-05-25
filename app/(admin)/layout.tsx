@@ -28,7 +28,16 @@ export default function AdminRouteGroupLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      {/*
+        Override the public site body background so admin pages use their own
+        flat gradient instead of the warm cream radial gradient from globals.css.
+      */}
+      <body
+        className="min-h-full"
+        style={{ background: "linear-gradient(180deg, #f7f4ec 0%, #f5efe4 100%)" }}
+      >
+        {children}
+      </body>
     </html>
   );
 }

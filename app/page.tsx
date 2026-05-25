@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { AboutSection } from "@/components/sections/about-section";
 
-export const metadata: Metadata = {
-  title: "Benna Philosophical Counselling — Clarity, Meaning, and Reflective Living",
-  description:
-    "A modern philosophical counselling practice helping people find clarity, resilience, and meaning through reflective conversation.",
-};
+import { AboutSection } from "@/components/sections/about-section";
 import { ApproachSection } from "@/components/sections/approach-section";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { ContactSection } from "@/components/sections/contact-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ServicesSection } from "@/components/sections/services-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
+
+export const metadata: Metadata = {
+  title: "Benna Philosophical Counselling — Clarity, Meaning, and Reflective Living",
+  description:
+    "A modern philosophical counselling practice helping people find clarity, resilience, and meaning through reflective conversation.",
+};
 
 export default function HomePage() {
   return (
