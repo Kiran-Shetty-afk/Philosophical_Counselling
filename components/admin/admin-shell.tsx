@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { LogOut } from "lucide-react";
 
 import { adminNavItems } from "@/lib/admin";
+import { cn } from "@/lib/utils";
 
 type AdminShellProps = {
   children: React.ReactNode;
@@ -14,10 +18,12 @@ export function AdminShell({
   title,
   description,
 }: AdminShellProps) {
+  const pathname = usePathname();
+
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f7f4ec_0%,#f5efe4_100%)]">
       <div className="mx-auto grid min-h-screen w-full max-w-7xl gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[260px_1fr] lg:px-10">
-        <aside className="rounded-[2rem] border border-[var(--color-border)] bg-white/88 p-6 shadow-[0_24px_60px_rgba(44,62,80,0.08)]">
+        <aside className="rounded-[2rem] border border-[var(--color-border)] bg-white/88 p-6 shadow-[0_24px_60px_rgba(44,62,80,0.08)] lg:sticky lg:top-8 lg:self-start">
           <Link href="/" className="block">
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
               Benna Admin
@@ -27,16 +33,24 @@ export function AdminShell({
             </h1>
           </Link>
 
-          <nav className="mt-8 grid gap-2">
-            {adminNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-2xl px-4 py-3 text-sm font-medium text-[var(--color-text-secondary)] transition hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="mt-8 grid gap-1">
+            {adminNavItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "rounded-2xl px-4 py-3 text-sm font-medium transition",
+                    isActive
+                      ? "bg-[rgba(255,193,7,0.12)] text-[var(--color-text-primary)] font-semibold"
+                      : "text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="mt-8 rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-4">

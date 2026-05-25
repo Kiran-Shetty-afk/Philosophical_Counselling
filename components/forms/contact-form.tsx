@@ -13,8 +13,18 @@ import {
   type ContactFormValues,
 } from "@/lib/validation";
 
+type ContactApiSuccess = {
+  enquiryReference: string;
+  message: string;
+};
+
+type ContactApiError = {
+  error?: string;
+};
+
 export function ContactForm() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submission, setSubmission] = useState<ContactApiSuccess | null>(null);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -26,9 +36,35 @@ export function ContactForm() {
     },
   });
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 700));
-    setIsSubmitted(true);
+  const onSubmit = async (values: ContactFormValues) => {
+    setSubmission(null);
+    setSubmissionError(null);
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+
+    const data = (await response.json()) as
+      | ContactApiSuccess
+      | ContactApiError;
+
+    if (!response.ok) {
+      setSubmissionError(
+        "error" in data
+          ? (data.error ?? "Unable to send your enquiry.")
+          : "Unable to send your enquiry.",
+      );
+      return;
+    }
+
+    if (!("enquiryReference" in data)) {
+      setSubmissionError("Unable to send your enquiry.");
+      return;
+    }
+
+    setSubmission(data);
     form.reset();
   };
 
@@ -114,13 +150,21 @@ export function ContactForm() {
           </Button>
         </div>
 
-        {isSubmitted ? (
+        {submission ? (
           <div className="flex items-start gap-3 rounded-[1.5rem] border border-[rgba(217,119,6,0.22)] bg-[rgba(255,152,0,0.08)] px-5 py-4 text-sm text-[var(--color-text-primary)]">
             <MailCheck className="mt-0.5 h-5 w-5 text-[var(--color-success)]" />
-            <p>
-              Thanks for reaching out. Your enquiry has been captured in the UI
-              flow and is ready for backend wiring in the next phase.
-            </p>
+            <div>
+              <p className="font-semibold">{submission.message}</p>
+              <p className="mt-1 text-[var(--color-text-secondary)]">
+                Reference: {submission.enquiryReference}
+              </p>
+            </div>
+          </div>
+        ) : null}
+
+        {submissionError ? (
+          <div className="rounded-[1.5rem] border border-[rgba(207,91,76,0.2)] bg-[rgba(207,91,76,0.08)] px-5 py-4 text-sm text-[#b14638]">
+            {submissionError}
           </div>
         ) : null}
       </form>

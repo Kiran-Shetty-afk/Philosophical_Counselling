@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -9,6 +10,12 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  function isActive(href: string) {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/65 bg-[color:var(--color-surface-muted)]/88 backdrop-blur-xl">
@@ -26,12 +33,17 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 xl:flex">
+        <nav className="hidden items-center gap-1 xl:flex">
           {siteConfig.navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-[var(--color-text-secondary)] transition hover:text-[var(--color-text-primary)]"
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-medium transition",
+                isActive(item.href)
+                  ? "bg-[rgba(255,193,7,0.12)] text-[var(--color-text-primary)] font-semibold"
+                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[rgba(255,193,7,0.07)]",
+              )}
             >
               {item.label}
             </Link>
@@ -69,7 +81,12 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-2xl px-4 py-3 text-sm font-medium text-[var(--color-text-secondary)] transition hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]"
+              className={cn(
+                "rounded-2xl px-4 py-3 text-sm font-medium transition",
+                isActive(item.href)
+                  ? "bg-[rgba(255,193,7,0.12)] text-[var(--color-text-primary)] font-semibold"
+                  : "text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text-primary)]",
+              )}
               onClick={() => setIsOpen(false)}
             >
               {item.label}

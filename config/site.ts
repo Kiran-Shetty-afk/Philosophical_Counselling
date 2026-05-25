@@ -98,12 +98,37 @@ export const faqs = [
   {
     question: "Is it the same as therapy?",
     answer:
-      "There can be overlap in care and depth, but philosophical counselling is especially centered on meaning, ethics, perspective, and the way we interpret our lives and decisions.",
+      "There can be overlap in care and depth, but philosophical counselling is especially centered on meaning, ethics, perspective, and the way we interpret our lives and decisions. It does not diagnose or treat clinical conditions.",
   },
   {
     question: "Who is it for?",
     answer:
-      "It is often helpful for people navigating transitions, identity questions, relationship strain, indecision, burnout, or a desire for more intentional living.",
+      "It is often helpful for people navigating transitions, identity questions, relationship strain, indecision, burnout, or a desire for more intentional living. You do not need a background in philosophy.",
+  },
+  {
+    question: "How long does a session last?",
+    answer:
+      "Sessions are available in 60-minute and 90-minute formats. The length depends on the depth of the work and your preference. Most people begin with 60-minute sessions and extend as the work deepens.",
+  },
+  {
+    question: "How many sessions will I need?",
+    answer:
+      "There is no fixed number. Some people find clarity in three or four sessions. Others prefer ongoing reflective work over several months. The pace is always guided by what feels most useful to you.",
+  },
+  {
+    question: "Is everything I share kept confidential?",
+    answer:
+      "Yes. Confidentiality is a foundational commitment of the practice. What you share in sessions is held with discretion and is not disclosed to anyone without your explicit consent, except in rare circumstances required by law.",
+  },
+  {
+    question: "Are sessions available online?",
+    answer:
+      "Yes. Sessions are available both online via video call and in person. Many clients find online sessions equally effective and appreciate the flexibility they offer.",
+  },
+  {
+    question: "What should I expect from the first session?",
+    answer:
+      "The first session is exploratory and unhurried. We begin by listening carefully to what brings you here, without rushing toward conclusions or advice. It is simply a chance to see if this kind of support feels right for you.",
   },
 ] as const;
 
@@ -113,18 +138,48 @@ export const resources = [
     description:
       "Practical reflections on discipline, acceptance, and inner steadiness for uncertain seasons.",
     category: "Stoicism",
+    readTime: "8 min read",
+    type: "Guide",
   },
   {
     title: "Existentialism and Meaning",
     description:
-      "A guided starting point for questions of freedom, responsibility, and purpose.",
+      "A guided starting point for questions of freedom, responsibility, and purpose in everyday life.",
     category: "Existentialism",
+    readTime: "10 min read",
+    type: "Guide",
   },
   {
     title: "Family Dialogue Prompts",
     description:
       "Conversation starters that help families speak with more honesty, patience, and mutual respect.",
     category: "Relationships",
+    readTime: "5 min read",
+    type: "Prompts",
+  },
+  {
+    title: "The Art of Slow Thinking",
+    description:
+      "Why deliberate, unhurried reflection leads to better decisions than reactive problem-solving.",
+    category: "Decision-Making",
+    readTime: "7 min read",
+    type: "Essay",
+  },
+  {
+    title: "Values Clarification Exercise",
+    description:
+      "A structured self-inquiry exercise to help you identify what you actually care about most.",
+    category: "Self-Inquiry",
+    readTime: "12 min read",
+    type: "Exercise",
+  },
+  {
+    title: "On Navigating Burnout",
+    description:
+      "Philosophical perspectives on exhaustion, meaning, and the recovery of a sustainable inner life.",
+    category: "Wellbeing",
+    readTime: "9 min read",
+    type: "Essay",
   },
 ] as const;
 
