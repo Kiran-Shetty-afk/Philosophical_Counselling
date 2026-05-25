@@ -1,6 +1,8 @@
 # Benna Philosophical Counselling Website
 
-A modern, production-quality Next.js website for a philosophical counselling practice. Built with a calm, premium visual language, reusable UI primitives, Framer Motion scroll animations, a fully functional admin console, and a complete appointment booking system.
+A modern, production-quality Next.js website for a philosophical counselling practice. Built with a calm, premium visual language, reusable UI primitives, Framer Motion scroll animations, a fully functional admin console, a complete appointment booking system, and a dynamic Daily Wisdom system.
+
+---
 
 ## Stack
 
@@ -14,6 +16,8 @@ A modern, production-quality Next.js website for a philosophical counselling pra
 | Icons | Lucide React |
 | Fonts | Geist Sans + Geist Mono |
 
+---
+
 ## Admin credentials
 
 Default credentials (override via environment variables):
@@ -24,6 +28,8 @@ Default credentials (override via environment variables):
 | Password | `Admin@12345` |
 
 Set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `.env.local` to override.
+
+---
 
 ## Run locally
 
@@ -52,15 +58,15 @@ npm run build
 
 ---
 
-## Public site — 11 pages
+## Public site — 12 pages
 
 | Page | Description |
 |---|---|
-| `/` | Home — animated hero with daily rotating wisdom quote, services, approach, testimonials, CTA |
-| `/about` | About — pillars, approach steps, testimonials, CTA |
+| `/` | Home — two-column hero with daily wisdom card, services, approach, testimonials, CTA, contact |
+| `/about` | Pillars, approach steps, testimonials, CTA |
 | `/personal-counselling` | Benefits with icons, 4-step process, testimonials, CTA |
 | `/family-counselling` | Focus areas, philosophical differentiators, CTA |
-| `/book-session` | **Full booking wizard** — calendar, real-time slot grid, details, confirm |
+| `/book-session` | Full booking wizard — calendar, real-time slot grid, details, confirm |
 | `/blog` | Featured post, category pills, animated post grid, CTA |
 | `/blog/[slug]` | Cover image, YouTube embed, prose body, related posts, CTA |
 | `/resources` | 6 cards with category, type, read time, CTA |
@@ -71,41 +77,12 @@ npm run build
 
 ---
 
-## Booking system
-
-### User flow
-1. Select a date from the calendar picker
-2. View only available 45-minute slots for that date
-3. Enter name, email, session type, and notes
-4. Review and confirm — server validates slot availability again before accepting
-
-### Slot rules
-- Sessions are fixed at **45 minutes**
-- **15-minute buffer** between sessions (configurable)
-- Past slots are hidden automatically
-- Break times are excluded from available slots
-- Holiday dates show no slots
-- Once booked, a slot is immediately unavailable to other users
-- Double-booking is prevented at the API level — frontend validation is never trusted alone
-
-### Slot states
-| State | Appearance |
-|---|---|
-| Available | White card, hover accent border |
-| Selected | Dark filled card |
-| Booked | Greyed out, strikethrough, "booked" label |
-| Blocked | Greyed out, strikethrough, "blocked" label |
-| Past | Greyed out, strikethrough, "past" label |
-| Break | Greyed out, strikethrough, "break" label |
-
----
-
 ## Admin console — 7 pages (protected)
 
 | Page | Description |
 |---|---|
 | `/admin/dashboard` | Metric cards with icons + trends, recent appointments, recent enquiries, quick actions |
-| `/admin/appointments` | Full appointment list with status filters, date filter, confirm/complete/cancel, admin notes |
+| `/admin/appointments` | Full list with status filters, date filter, confirm/complete/cancel, admin notes |
 | `/admin/availability` | Set working days, hours, break times, session duration, buffer, holiday dates |
 | `/admin/wisdom` | Manage daily wisdom quotes — add, edit, delete, toggle active, pin featured |
 | `/admin/enquiries` | Status management with response drafts |
@@ -120,7 +97,8 @@ npm run build
 |---|---|---|
 | `/api/slots` | GET `?date=YYYY-MM-DD` | Returns all slots for a date with availability status |
 | `/api/appointments` | POST | Create booking — double-booking protected, server-validated |
-| `/api/daily-wisdom` | GET | Public — returns current daily quote. `?refresh=true&exclude=id` for random refresh |
+| `/api/contact` | POST | Submit contact enquiry |
+| `/api/daily-wisdom` | GET | Public — returns current daily quote |
 | `/api/daily-wisdom` | POST | Admin only — create a new wisdom quote |
 | `/api/daily-wisdom/[id]` | PATCH | Admin only — update quote fields |
 | `/api/daily-wisdom/[id]` | DELETE | Admin only — delete a quote |
@@ -133,61 +111,92 @@ npm run build
 
 ---
 
+## Booking system
+
+### User flow
+1. Select a date from the calendar picker
+2. View only available 45-minute slots for that date
+3. Enter name, email, session type, and notes
+4. Review and confirm — server re-validates slot availability before accepting
+
+### Slot rules
+- Sessions fixed at **45 minutes**, **15-minute buffer** between sessions (both configurable by admin)
+- Past slots hidden automatically
+- Break times excluded from available slots
+- Holiday dates show no slots
+- Once booked, a slot is immediately unavailable to other users
+- Double-booking prevented at API level — frontend validation never trusted alone
+
+### Slot states
+
+| State | Appearance |
+|---|---|
+| Available | White card, hover accent border |
+| Selected | Dark filled card |
+| Booked | Greyed out, strikethrough, "booked" label |
+| Blocked | Greyed out, strikethrough, "blocked" label |
+| Past | Greyed out, strikethrough, "past" label |
+| Break | Greyed out, strikethrough, "break" label |
+
+### Booking store (`lib/booking-store.ts`)
+Server-side in-memory singleton. All logic is production-grade and Prisma-ready — swap Map operations for database calls in Phase 2 without changing any API or UI code.
+
+**Data held:**
+- `appointments` — all bookings with full schema
+- `blockedSlots` — admin-blocked individual slots
+- `availabilityConfig` — working days, hours, breaks, holidays, session duration, buffer
+
+---
+
 ## Daily Wisdom system
 
 ### How it works
 - 18 quotes seeded across 7 categories: Stoicism, Philosophy, Mindfulness, Self-Reflection, Motivation, Existentialism, Ethics
-- Server renders the initial quote at page load (no flash, no layout shift)
-- Client component handles animated fade transitions and refresh interactions
+- Quote is server-rendered inside the hero card at page load — no flash, no layout shift
+- Changes automatically once per day at midnight UTC
+- Admin can override at any time by pinning a featured quote
 
 ### Selection logic
-1. **Featured quote** — if admin pins a quote as featured, it always shows
-2. **Daily deterministic** — otherwise, a quote is selected by day index (same quote all day for all visitors, changes at midnight UTC)
-3. **Refresh** — "New quote" button fetches a random active quote excluding the current one
+1. **Featured quote** — if admin pins a quote, it always shows until unpinned
+2. **Daily deterministic** — otherwise selected by day index (same quote all day for all visitors)
+3. Inactive quotes are never shown
 
 ### Quote data structure
+
 ```ts
 type WisdomQuote = {
   id: string;
   quote: string;
   author: string;
-  source?: string;        // book / work title
+  source?: string;       // book / work title
   category: WisdomCategory;
-  isActive: boolean;      // hidden from rotation when false
-  isFeatured: boolean;    // overrides random — only one can be featured
+  isActive: boolean;     // excluded from rotation when false
+  isFeatured: boolean;   // overrides daily rotation — only one at a time
   createdAt: string;
   updatedAt: string;
 }
+
+type WisdomCategory =
+  | "Stoicism" | "Philosophy" | "Mindfulness"
+  | "Self-Reflection" | "Motivation" | "Existentialism" | "Ethics"
 ```
 
 ### Admin controls (`/admin/wisdom`)
 - Search by quote text or author
-- Filter by category (7 categories)
-- Filter by status: All / Active / Inactive / Featured
-- Pin/unpin featured (only one featured at a time — pinning a new one unpins the previous)
+- Filter by category (7 categories) and status (All / Active / Inactive / Featured)
+- Pin/unpin featured — pinning a new one auto-unpins the previous
 - Toggle active/inactive per quote
-- Create new quotes with full form
-- Edit existing quotes inline
-- Delete quotes
+- Create, edit, and delete quotes
 
 ### Frontend UX
-- Animated fade-in/out transitions via Framer Motion `AnimatePresence`
-- "New quote" refresh button with loading spinner
-- Category badge with colour coding per category
-- Author attribution with optional source title
-- Decorative glow background matching site aesthetic
-- Fully responsive — mobile, tablet, desktop
+- Quote displayed in the floating glassmorphism card on the right side of the hero
+- Original `animate-float-soft` CSS animation preserved
+- Author attribution with optional italic source title
+- Two mini-cards below link to `/personal-counselling` and `/family-counselling`
+- No refresh button — quote changes daily or when admin pins a new one
 
----
-
-`lib/booking-store.ts` — server-side in-memory singleton store.
-
-All booking logic (slot generation, double-booking checks, availability config) is real and production-grade. The store is designed to be a drop-in replacement for Prisma — swap the Map operations for database calls in Phase 2 without changing any API or UI code.
-
-**Data held in store:**
-- `appointments` — all bookings with full schema
-- `blockedSlots` — admin-blocked individual slots
-- `availabilityConfig` — working days, hours, breaks, holidays, session duration, buffer
+### Wisdom store (`lib/wisdom-store.ts`)
+Server-side in-memory singleton. Same Prisma-ready pattern as the booking store.
 
 ---
 
@@ -200,14 +209,36 @@ All booking logic (slot generation, double-booking checks, availability config) 
 - Full OG + Twitter metadata on all pages
 - SVG image support via `next.config.ts`
 - `scroll-margin-top` for sticky header anchor offset
+- Active link highlighting in header (desktop + mobile)
+- Admin layout isolated from public layout (no shared header/footer)
+
+---
+
+## Design system
+
+| Token | Value |
+|---|---|
+| Background | `#faf7f1` |
+| Surface | `#fffdf8` |
+| Surface muted | `#f6efe3` |
+| Text primary | `#2c3e50` |
+| Text secondary | `#70808b` |
+| Border | `#e7e0d4` |
+| Accent | `#ff9800` |
+| Accent soft | `#ffc107` |
+| Gradient brand | `135deg, #ffc107 → #ff9800` |
+
+All components use CSS custom properties. No hardcoded colour values in component files.
 
 ---
 
 ## Phase 2 roadmap
 
-- Replace in-memory store with Prisma + Neon PostgreSQL
+- Replace in-memory stores with Prisma + Neon PostgreSQL
 - Email notifications on booking confirmation (Resend)
 - User dashboard — view and cancel own appointments
 - Newsletter subscription
 - Cloudinary image uploads for blog and counsellor profile
 - Rate limiting on booking and contact endpoints (Arcjet)
+- Counsellor registration page
+- User authentication (client login)

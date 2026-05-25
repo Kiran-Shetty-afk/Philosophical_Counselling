@@ -1382,3 +1382,378 @@ Every detail matters:
 **Document Version**: 2.0 (Codex Format)
 **Last Updated**: May 21, 2026
 **Status**: Ready for Senior Developer Implementation
+
+
+---
+
+---
+
+# 📋 Implementation Log
+## Completed Development — Phase 1
+
+> This section documents every change made during active development for future reference.
+> All changes are committed to the `main` branch on GitHub.
+
+---
+
+## ✅ Infrastructure & Configuration
+
+### Next.js 16 middleware (proxy.ts)
+- Renamed convention from `middleware.ts` to `proxy.ts` (Next.js 16 requirement)
+- Exported function renamed from `middleware()` to `proxy()`
+- Admin routes `/admin/*` redirect to `/auth/login` when unauthenticated
+- `/auth/login` redirects to `/admin/dashboard` when already authenticated
+
+### next.config.ts
+- Added `dangerouslyAllowSVG: true` for blog cover SVG images
+- Added `contentDispositionType` and `contentSecurityPolicy` for SVG safety
+
+### globals.css
+- Added `@plugin "@tailwindcss/typography"` for blog post prose styling
+- Added `[id] { scroll-margin-top: 5rem }` for sticky header anchor offset
+- CSS keyframes: `fade-up`, `glow-drift`, `float-soft` — all respect `prefers-reduced-motion`
+
+### app/layout.tsx
+- Full OG + Twitter metadata with `metadataBase`
+- Title template: `%s | Benna Philosophical Counselling`
+- `robots` config: index + follow with full googleBot settings
+
+### Admin layout (app/(admin)/layout.tsx)
+- Isolated from root layout — no public `SiteHeader` or `SiteFooter` on admin pages
+- Body has inline style override for flat admin background gradient
+- Prevents nested `<html>` hydration error (was a critical bug)
+
+### .env.example
+- Documents `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `DATABASE_URL`, `RESEND_API_KEY`, `NEXT_PUBLIC_SITE_URL`
+
+### sitemap.ts + robots.ts
+- Sitemap covers all 12 public pages + 3 blog posts with correct priorities
+- Robots blocks `/admin/` and `/auth/` from all crawlers
+
+---
+
+## ✅ Design System
+
+### CSS custom properties (globals.css)
+All components use design tokens — no hardcoded colours in component files:
+```
+--color-background: #faf7f1
+--color-surface: #fffdf8
+--color-surface-muted: #f6efe3
+--color-surface-highlight: rgba(255,193,7,0.12)
+--color-text-primary: #2c3e50
+--color-text-secondary: #70808b
+--color-border: #e7e0d4
+--color-border-strong: #d8ccb6
+--color-accent: #ff9800
+--color-accent-soft: #ffc107
+--color-success: #d97706
+--gradient-brand: linear-gradient(135deg, #ffc107 0%, #ff9800 100%)
+```
+
+### UI primitives (components/ui/)
+- `Button` — CVA variants: `primary`, `secondary`, `ghost`. Sizes: `default`, `lg`. Rounded-full, gradient primary
+- `Input` — `rounded-2xl`, amber focus ring, `bg-white/88`
+- `Textarea` — `rounded-3xl`, same focus ring
+- `Select` — `appearance-none` with `ChevronDown` icon overlay (fixes missing native arrow)
+- `FaqAccordion` — CSS grid row animation for smooth expand/collapse, `aria-expanded`
+- `SectionHeading` — eyebrow + title + description, optional `centered` prop
+- `PageHero` — consistent inner page hero with `AnimatedSection` wrapper
+- `AnimatedSection` — Framer Motion `whileInView`, directions: up/left/right/none
+- `StaggerContainer` + `StaggerItem` — staggered child animations
+
+### StatusBadge (components/admin/status-badge.tsx)
+Tones: `neutral`, `accent` (amber), `warning` (dark amber), `success` (green), `error` (red)
+- Fixed: `success` was previously amber (identical to `accent`) — now proper green `#15803d`
+
+---
+
+## ✅ Layout Components
+
+### SiteHeader (components/layout/site-header.tsx)
+- Sticky, `backdrop-blur-xl`, `z-50`
+- Active link highlighting via `usePathname()` — desktop pill style + mobile highlight
+- Mobile hamburger menu with smooth `max-h` transition
+- "Book a Session" CTA button visible from `md` breakpoint
+
+### SiteFooter (components/layout/site-footer.tsx)
+- 4-column layout: brand + contact info, services, explore, CTA
+- Contact info with Mail, Clock, MapPin icons
+- Copyright bar with Privacy, Terms, FAQ links
+- `new Date().getFullYear()` for dynamic year
+
+### AdminShell (components/admin/admin-shell.tsx)
+- Sticky sidebar on desktop (`lg:sticky lg:top-8 lg:self-start`)
+- Active nav link highlighting via `usePathname()`
+- Sign out button posts to `/api/auth/logout`
+
+---
+
+## ✅ Public Pages
+
+### Home (`/`)
+- `HeroSection` — two-column layout, headline left, floating wisdom card right
+- `WisdomSectionServer` removed — wisdom lives in hero card only
+- Sections: Hero → About → Services → Approach → Testimonials → CTA → Contact
+- All sections use `AnimatedSection` / `StaggerContainer` scroll-reveal
+
+### About (`/about`)
+- PageHero + AboutSection + ApproachSection + TestimonialsSection + CtaBanner
+
+### Personal Counselling (`/personal-counselling`)
+- Benefits grid with icons (Compass, Lightbulb, HeartHandshake, Shield)
+- 4-step process in numbered cards
+- Session details bar (duration, online/in-person, confidential)
+- TestimonialsSection + CtaBanner
+
+### Family Counselling (`/family-counselling`)
+- Focus areas grid with icons (MessageCircle, Scale, Heart, Users)
+- "Philosophical rather than prescriptive" differentiators section
+- CtaBanner
+
+### Book a Session (`/book-session`)
+- Full `BookingWizard` component (4-step flow)
+- Sidebar: session types, session packages, how-it-works note
+- CtaBanner at bottom
+
+### Blog (`/blog`)
+- Featured post with `AnimatedSection`
+- Category pills with hover states
+- `StaggerContainer` post grid
+- CtaBanner at bottom
+
+### Blog post (`/blog/[slug]`)
+- Back link, cover image with `priority`
+- Meta row: category, read time, author, date
+- YouTube embed (aspect-video)
+- Prose body with `@tailwindcss/typography`
+- Tags, in-article CTA card
+- Related posts grid (2 cards)
+- `generateMetadata` with OG article tags
+
+### Resources (`/resources`)
+- 6 cards with category colour badges, type label, read time
+- Category filter pills (static display)
+- CtaBanner
+
+### FAQ (`/faq`)
+- 8 questions in `FaqAccordion`
+- CtaBanner at bottom
+
+### Testimonials (`/testimonials`)
+- `TestimonialsSection` + CtaBanner
+
+### Contact (`/contact`)
+- `ContactForm` wired to `/api/contact`
+- CtaBanner (removed duplicate `ContactSection`)
+
+### Counsellor (`/counsellor`)
+- Avatar placeholder (gradient circle with "B")
+- Qualifications + Specializations with `CheckCircle2` icons
+- Philosophy note card
+- CtaBanner
+
+### 404 (`/not-found.tsx`)
+- Compass icon, "This path does not exist yet"
+- Return home + Contact buttons
+
+---
+
+## ✅ Forms
+
+### ContactForm
+- Zod validation: name (min 2), email, subject (min 3), message (min 20)
+- Calls `POST /api/contact`
+- Shows enquiry reference on success
+
+### AppointmentForm (legacy — replaced by BookingWizard)
+- Still present in codebase but `/book-session` now uses `BookingWizard`
+
+### LoginForm
+- Posts to `POST /api/auth/login`
+- Redirects to `nextPath` or `/admin/dashboard` on success
+- Removed hardcoded credentials from login page UI
+
+---
+
+## ✅ Booking System
+
+### Files
+- `lib/booking-store.ts` — server-side in-memory singleton
+- `lib/slots.ts` — slot generation engine
+- `components/booking/booking-wizard.tsx` — 4-step UI
+- `app/api/slots/route.ts`
+- `app/api/appointments/route.ts` (rebuilt)
+- `app/api/admin/appointments/route.ts`
+- `app/api/admin/appointments/[id]/route.ts`
+- `app/api/admin/availability/route.ts`
+- `app/api/admin/slots/block/route.ts`
+- `app/(admin)/admin/availability/page.tsx`
+- `components/admin/availability-panel.tsx`
+- `components/admin/appointments-panel.tsx` (rebuilt)
+
+### BookingWizard steps
+1. **Date** — calendar picker, shows available slot count on selection
+2. **Slot** — grid of 45-min slots with availability states, loading skeletons
+3. **Details** — name, email, session type (card selector), notes
+4. **Confirm** — review summary, server POST, success screen with reference
+
+### Slot generation logic (lib/slots.ts)
+- Reads `AvailabilityConfig` from store
+- Generates slots from `startTime` to `endTime` in `sessionDuration + buffer` increments
+- Filters: past time, break window, booked, blocked, holiday
+- Returns `TimeSlot[]` with `available: boolean` and `reason`
+
+### Double-booking protection
+- `isSlotTaken()` checks active appointments for the date/time
+- `isSlotBlocked()` checks admin-blocked slots
+- Both checked server-side on every POST — frontend state never trusted
+
+### AvailabilityPanel
+- Toggle days on/off, set start/end times, break window per day
+- Session duration and buffer configurable
+- Holiday dates with optional reason
+- Saves to `POST /api/admin/availability`
+
+### AppointmentsPanel (rebuilt)
+- Loads from `GET /api/admin/appointments`
+- Status filter pills: All / Pending / Confirmed / Completed / Cancelled
+- Date filter input
+- PATCH status via `PATCH /api/admin/appointments/[id]`
+- Admin notes auto-save on change
+
+---
+
+## ✅ Daily Wisdom System
+
+### Files
+- `lib/wisdom-store.ts` — server-side in-memory singleton, 18 seeded quotes
+- `app/api/daily-wisdom/route.ts` — GET (public) + POST (admin)
+- `app/api/daily-wisdom/[id]/route.ts` — PATCH + DELETE (admin)
+- `app/(admin)/admin/wisdom/page.tsx`
+- `components/admin/wisdom-panel.tsx`
+
+### Selection logic
+1. Featured quote (admin-pinned) always wins
+2. Daily deterministic: `pool[dayIndex % pool.length]` — changes at midnight UTC
+3. Inactive quotes excluded from pool
+
+### WisdomPanel features
+- Search by quote text or author
+- Filter by 7 categories + status (All/Active/Inactive/Featured)
+- Quick-toggle active/featured per quote (icon buttons)
+- Inline create/edit form with all fields
+- Delete with loading state
+- Pinning a new featured auto-unpins the previous
+
+### Hero integration
+- `getDailyQuote()` called directly in `HeroSection` (server component)
+- Quote rendered in the floating glassmorphism card (right column)
+- `animate-float-soft` CSS animation preserved
+- Author + optional italic source title
+- Mini-cards link to `/personal-counselling` and `/family-counselling`
+
+---
+
+## ✅ Admin Dashboard
+
+### MetricCard (rebuilt)
+- Icon slot (LucideIcon)
+- Clickable href — entire card is a link
+- Trend indicator: `up` (green), `down` (red), `neutral` (grey)
+
+### Dashboard page (rebuilt)
+- 4 metric cards: Appointments, Enquiries, Published Posts, Testimonials
+- Recent appointments panel with status badges
+- Recent enquiries panel with status badges
+- Quick-action link strip
+
+### Blog manager
+- Post list sidebar with selected state
+- Full edit form: title, slug, category, author, dates, excerpt, cover image, YouTube, tags, body
+- Create new post, save draft, publish, toggle featured, delete
+- Flash message feedback
+
+---
+
+## ✅ SEO & Metadata
+
+Every page has a `Metadata` export:
+
+| Page | Title |
+|---|---|
+| `/` | Benna Philosophical Counselling — Clarity, Meaning, and Reflective Living |
+| `/about` | About |
+| `/personal-counselling` | Personal Counselling |
+| `/family-counselling` | Family Counselling |
+| `/book-session` | Book a Session |
+| `/blog` | Blog |
+| `/blog/[slug]` | `{post.title}` (dynamic, with OG article tags) |
+| `/resources` | Resources |
+| `/faq` | FAQ |
+| `/testimonials` | Testimonials |
+| `/contact` | Contact |
+| `/counsellor` | Meet the Counsellor |
+| `/admin/*` | Admin — Benna Philosophical Counselling (noindex) |
+
+---
+
+## ✅ Blog
+
+### lib/blog.ts
+- 3 posts: Clarity, Family, Wellbeing categories
+- `getAllBlogPosts()` — sorted by date descending
+- `getFeaturedBlogPost()` — first featured, fallback to first
+- `getBlogPostBySlug()` — for static params
+- `getYouTubeEmbedUrl()` — handles `youtube.com/watch?v=`, `youtu.be/`, `/embed/`
+
+### Blog cover SVGs (public/images/blog/)
+- `clarity.svg` — compass with cardinal lines, floating circles, horizon wave
+- `family-dialogue.svg` — two speech bubbles with connecting arc
+- `burnout-recovery.svg` — layered sun with rays, upward recovery path
+
+---
+
+## ✅ Config data (config/site.ts)
+
+- `siteConfig` — name, description, url (`https://benna-philosophy.com`), navItems
+- `services` — 3 service cards
+- `pillars` — 3 about pillars
+- `testimonials` — 3 testimonials
+- `wisdomQuotes` — 3 fallback quotes (superseded by wisdom-store)
+- `faqs` — 8 FAQ entries
+- `resources` — 6 resource cards with `readTime` and `type`
+- `counsellorProfile` — name, role, bio, qualifications, specializations
+- `appointmentServices` — 3 service options for booking
+- `sessionPackages` — 3 pricing packages
+- `appointmentSlots` — weekly availability display (legacy, superseded by booking-store)
+
+---
+
+## ✅ Known limitations (Phase 1)
+
+| Item | Status |
+|---|---|
+| All data is in-memory | Resets on server restart — replace with Prisma in Phase 2 |
+| No email notifications | Booking/contact confirmations are UI-only |
+| No user accounts | Clients cannot log in or view their bookings |
+| No payment processing | Session packages are informational only |
+| No newsletter | Subscription form not yet built |
+| Blog images are SVGs | No real photography — placeholder illustrations |
+| Counsellor avatar | Gradient circle placeholder — no real photo |
+
+---
+
+## 🗓️ Commit history summary
+
+| Commit | Description |
+|---|---|
+| Initial | Project scaffold, homepage, basic pages |
+| Phase 1 complete | Animations, routing, pages, SEO, UI polish |
+| Pending tasks | Blog prose, animations, page content, security, cleanup |
+| Dashboard overhaul | Status badges, SVGs, SEO, scroll anchors, site URL |
+| Lint + metadata | Blog animations, select chevron, missing metadata |
+| Booking system | Complete appointment booking with real-time slot management |
+| Daily Wisdom | Wisdom store, API, admin panel, hero card integration |
+| Hero restore | Original hero card style, wisdom from store, no refresh button |
+| Final | README + CODEX updated, all changes documented |
