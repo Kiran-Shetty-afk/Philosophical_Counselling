@@ -1,11 +1,42 @@
 <svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1600" height="900" fill="#FAF4EA"/>
-  <circle cx="1193" cy="180" r="170" fill="#FFE49A" fill-opacity="0.72"/>
-  <circle cx="540" cy="240" r="250" fill="#FFD08C" fill-opacity="0.42"/>
-  <rect x="276" y="278" width="366" height="248" rx="56" fill="#FFF8EC" stroke="#E7D4B2" stroke-width="12"/>
-  <rect x="714" y="220" width="402" height="272" rx="56" fill="#FFF8EC" stroke="#E7D4B2" stroke-width="12"/>
-  <path d="M504 526L637 630" stroke="#D17B24" stroke-width="18" stroke-linecap="round"/>
-  <path d="M913 492L756 630" stroke="#D17B24" stroke-width="18" stroke-linecap="round"/>
-  <path d="M330 675C532 554 782 542 1001 626C1122 673 1226 738 1390 720" stroke="#E5B44E" stroke-width="18" stroke-linecap="round"/>
-  <path d="M242 744C450 660 706 660 910 737C1032 784 1152 808 1322 786" stroke="#F2C97B" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- Background glow -->
+  <circle cx="1200" cy="160" r="300" fill="#FFE49A" fill-opacity="0.35"/>
+  <circle cx="400" cy="260" r="340" fill="#FFD08C" fill-opacity="0.22"/>
+  <circle cx="800" cy="700" r="280" fill="#FFF9EF" fill-opacity="0.6"/>
+
+  <!-- Ground layers -->
+  <path d="M0 720 C280 640 560 620 840 650 C1060 672 1240 730 1480 710 C1540 706 1580 698 1600 692 L1600 900 L0 900 Z" fill="#FFF9EF"/>
+  <path d="M0 790 C300 740 600 730 900 758 C1100 778 1280 810 1520 796 L1600 792 L1600 900 L0 900 Z" fill="#FFFDF8" fill-opacity="0.65"/>
+
+  <!-- Left speech bubble -->
+  <rect x="220" y="240" width="380" height="260" rx="52" fill="white" fill-opacity="0.82" stroke="#E7D4B2" stroke-width="3"/>
+  <path d="M340 500 L300 570 L420 510" fill="white" stroke="#E7D4B2" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Lines inside left bubble -->
+  <line x1="270" y1="310" x2="550" y2="310" stroke="#E5B44E" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="270" y1="350" x2="490" y2="350" stroke="#E5B44E" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="270" y1="390" x2="520" y2="390" stroke="#E5B44E" stroke-width="8" stroke-linecap="round" opacity="0.25"/>
+  <line x1="270" y1="430" x2="440" y2="430" stroke="#E5B44E" stroke-width="8" stroke-linecap="round" opacity="0.2"/>
+
+  <!-- Right speech bubble -->
+  <rect x="1000" y="180" width="400" height="280" rx="52" fill="white" fill-opacity="0.82" stroke="#E7D4B2" stroke-width="3"/>
+  <path d="M1260 460 L1300 540 L1180 470" fill="white" stroke="#E7D4B2" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Lines inside right bubble -->
+  <line x1="1050" y1="250" x2="1350" y2="250" stroke="#D7821F" stroke-width="8" stroke-linecap="round" opacity="0.45"/>
+  <line x1="1050" y1="292" x2="1300" y2="292" stroke="#D7821F" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <line x1="1050" y1="334" x2="1320" y2="334" stroke="#D7821F" stroke-width="8" stroke-linecap="round" opacity="0.22"/>
+  <line x1="1050" y1="376" x2="1240" y2="376" stroke="#D7821F" stroke-width="8" stroke-linecap="round" opacity="0.18"/>
+
+  <!-- Connection arc between bubbles — dialogue bridge -->
+  <path d="M600 370 C700 280 900 280 1000 370" stroke="#E5B44E" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <path d="M600 370 C700 280 900 280 1000 370" stroke="#FFF4D7" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+
+  <!-- Small floating dots suggesting connection -->
+  <circle cx="720" cy="310" r="8" fill="#E5B44E" opacity="0.5"/>
+  <circle cx="800" cy="290" r="6" fill="#E5B44E" opacity="0.4"/>
+  <circle cx="880" cy="310" r="8" fill="#E5B44E" opacity="0.5"/>
+
+  <!-- Ground curve -->
+  <path d="M200 760 C440 690 700 672 960 700 C1140 720 1300 768 1520 748" stroke="#E5B44E" stroke-width="14" stroke-linecap="round" fill="none"/>
 </svg>

@@ -1,9 +1,43 @@
 <svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="900" fill="#F8F2E8"/>
-  <circle cx="790" cy="304" r="194" fill="#FFCB63" fill-opacity="0.8"/>
-  <circle cx="790" cy="304" r="262" fill="#FFE8B0" fill-opacity="0.42"/>
-  <path d="M95 736C277 640 443 608 673 622C864 632 1008 696 1183 700C1294 702 1391 680 1505 632V900H95V736Z" fill="#FFF9EF"/>
-  <path d="M216 602C324 670 411 692 533 690C633 688 717 658 803 645C911 628 1005 635 1124 686C1214 724 1317 736 1434 706" stroke="#D17B24" stroke-width="18" stroke-linecap="round"/>
-  <path d="M276 544C412 614 557 610 694 535" stroke="#E5B44E" stroke-width="14" stroke-linecap="round"/>
-  <path d="M942 534C1060 601 1188 602 1307 545" stroke="#E5B44E" stroke-width="14" stroke-linecap="round"/>
+  <rect width="1600" height="900" fill="#FAF2E6"/>
+
+  <!-- Sky gradient layers -->
+  <rect width="1600" height="560" fill="url(#skyGrad)"/>
+  <defs>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFF4D7"/>
+      <stop offset="100%" stop-color="#FAF2E6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sun glow layers — recovery / warmth -->
+  <circle cx="800" cy="320" r="300" fill="#FFE8A0" fill-opacity="0.22"/>
+  <circle cx="800" cy="320" r="220" fill="#FFD56A" fill-opacity="0.32"/>
+  <circle cx="800" cy="320" r="150" fill="#FFCB63" fill-opacity="0.55"/>
+  <circle cx="800" cy="320" r="90" fill="#FFB830" fill-opacity="0.75"/>
+  <circle cx="800" cy="320" r="48" fill="#FFA500" fill-opacity="0.9"/>
+
+  <!-- Sun rays -->
+  <line x1="800" y1="140" x2="800" y2="80" stroke="#FFB830" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <line x1="800" y1="500" x2="800" y2="560" stroke="#FFB830" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+  <line x1="620" y1="320" x2="560" y2="320" stroke="#FFB830" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+  <line x1="980" y1="320" x2="1040" y2="320" stroke="#FFB830" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+  <line x1="673" y1="173" x2="630" y2="130" stroke="#FFB830" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+  <line x1="927" y1="173" x2="970" y2="130" stroke="#FFB830" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+  <line x1="673" y1="467" x2="630" y2="510" stroke="#FFB830" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+  <line x1="927" y1="467" x2="970" y2="510" stroke="#FFB830" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- Horizon / ground -->
+  <path d="M0 640 C200 580 440 560 700 580 C900 596 1060 640 1300 628 C1420 622 1520 600 1600 580 L1600 900 L0 900 Z" fill="#FFF9EF"/>
+  <path d="M0 720 C260 672 520 660 800 682 C1000 698 1180 736 1420 720 L1600 712 L1600 900 L0 900 Z" fill="#FFFDF8" fill-opacity="0.7"/>
+
+  <!-- Gentle upward path — recovery arc -->
+  <path d="M120 760 C280 700 440 660 620 640 C760 624 880 628 1020 610 C1160 592 1300 560 1480 530" stroke="#D7821F" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M120 760 C280 700 440 660 620 640 C760 624 880 628 1020 610 C1160 592 1300 560 1480 530" stroke="#FFF4D7" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.8"/>
+
+  <!-- Small floating circles — breath / space -->
+  <circle cx="300" cy="480" r="28" fill="white" fill-opacity="0.55" stroke="#E7D4B2" stroke-width="2"/>
+  <circle cx="1300" cy="440" r="22" fill="white" fill-opacity="0.55" stroke="#E7D4B2" stroke-width="2"/>
+  <circle cx="520" cy="560" r="16" fill="white" fill-opacity="0.5" stroke="#E7D4B2" stroke-width="1.5"/>
+  <circle cx="1100" cy="520" r="18" fill="white" fill-opacity="0.5" stroke="#E7D4B2" stroke-width="1.5"/>
 </svg>

@@ -1,3 +1,5 @@
+import { CalendarCheck2, Mail, FileText, Star } from "lucide-react";
+
 import { getAllBlogPosts } from "@/lib/blog";
 import { testimonials } from "@/config/site";
 
@@ -6,21 +8,33 @@ export const adminStats = [
     label: "Appointment Requests",
     value: "18",
     detail: "4 pending review",
+    icon: CalendarCheck2,
+    href: "/admin/appointments",
+    trend: "up" as const,
   },
   {
     label: "Open Enquiries",
     value: "12",
-    detail: "3 marked urgent",
+    detail: "3 unread",
+    icon: Mail,
+    href: "/admin/enquiries",
+    trend: "up" as const,
   },
   {
     label: "Published Posts",
     value: String(getAllBlogPosts().length),
     detail: "1 featured article live",
+    icon: FileText,
+    href: "/admin/blog",
+    trend: "neutral" as const,
   },
   {
     label: "Testimonials",
     value: String(testimonials.length),
     detail: "2 awaiting moderation",
+    icon: Star,
+    href: "/admin/testimonials",
+    trend: "neutral" as const,
   },
 ] as const;
 

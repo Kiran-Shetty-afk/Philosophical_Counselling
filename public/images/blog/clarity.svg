@@ -1,10 +1,39 @@
 <svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1600" height="900" fill="#F8F2E8"/>
-  <circle cx="430" cy="240" r="210" fill="#FFD56A" fill-opacity="0.65"/>
-  <circle cx="1020" cy="300" r="280" fill="#FFB347" fill-opacity="0.3"/>
-  <circle cx="1210" cy="220" r="120" fill="#FFF4D7"/>
-  <path d="M170 690C330 490 530 430 760 500C910 546 1020 620 1230 590C1328 576 1408 538 1494 484V900H170V690Z" fill="#FFF9EF"/>
-  <path d="M290 628C458 510 649 481 860 537C1023 580 1149 655 1320 631C1392 621 1454 591 1514 550" stroke="#E5B44E" stroke-width="18" stroke-linecap="round"/>
-  <path d="M358 330C447 265 543 265 649 331" stroke="#D7821F" stroke-width="16" stroke-linecap="round"/>
-  <path d="M873 373C953 315 1043 315 1143 373" stroke="#D7821F" stroke-width="16" stroke-linecap="round" opacity="0.72"/>
+  <rect width="1600" height="900" fill="#FAF4E8"/>
+
+  <!-- Background glow blobs -->
+  <circle cx="400" cy="200" r="320" fill="#FFD56A" fill-opacity="0.28"/>
+  <circle cx="1200" cy="280" r="380" fill="#FFB347" fill-opacity="0.18"/>
+  <circle cx="800" cy="600" r="260" fill="#FFF4D7" fill-opacity="0.5"/>
+
+  <!-- Horizon wave -->
+  <path d="M0 680 C200 600 420 560 680 590 C880 612 1040 680 1280 660 C1400 650 1500 620 1600 590 L1600 900 L0 900 Z" fill="#FFF9EF"/>
+  <path d="M0 740 C240 680 500 660 760 690 C960 712 1120 760 1360 740 C1460 732 1540 710 1600 690 L1600 900 L0 900 Z" fill="#FFFDF8" fill-opacity="0.7"/>
+
+  <!-- Central compass / clarity symbol -->
+  <circle cx="800" cy="340" r="130" fill="white" fill-opacity="0.72" stroke="#E5B44E" stroke-width="3"/>
+  <circle cx="800" cy="340" r="90" fill="white" fill-opacity="0.9" stroke="#F2C97B" stroke-width="2"/>
+  <!-- Compass lines -->
+  <line x1="800" y1="220" x2="800" y2="460" stroke="#D7821F" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="680" y1="340" x2="920" y2="340" stroke="#D7821F" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="715" y1="255" x2="885" y2="425" stroke="#E5B44E" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <line x1="885" y1="255" x2="715" y2="425" stroke="#E5B44E" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <!-- Compass needle -->
+  <polygon points="800,260 790,340 800,320 810,340" fill="#D7821F"/>
+  <polygon points="800,420 790,340 800,360 810,340" fill="#E5B44E" opacity="0.6"/>
+  <!-- Centre dot -->
+  <circle cx="800" cy="340" r="10" fill="#D7821F"/>
+
+  <!-- Floating thought circles -->
+  <circle cx="340" cy="380" r="52" fill="white" fill-opacity="0.7" stroke="#E7D4B2" stroke-width="2"/>
+  <circle cx="1260" cy="320" r="44" fill="white" fill-opacity="0.7" stroke="#E7D4B2" stroke-width="2"/>
+  <circle cx="520" cy="520" r="34" fill="white" fill-opacity="0.6" stroke="#E7D4B2" stroke-width="1.5"/>
+  <circle cx="1080" cy="500" r="40" fill="white" fill-opacity="0.6" stroke="#E7D4B2" stroke-width="1.5"/>
+
+  <!-- Subtle arc lines suggesting clarity / opening -->
+  <path d="M560 200 C640 140 760 120 880 140 C960 154 1020 190 1060 240" stroke="#E5B44E" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.5"/>
+  <path d="M580 220 C660 168 770 150 880 168 C950 180 1004 210 1040 252" stroke="#FFF4D7" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8"/>
+
+  <!-- Ground curve -->
+  <path d="M160 760 C380 680 620 660 860 690 C1040 712 1200 760 1440 740" stroke="#E5B44E" stroke-width="16" stroke-linecap="round" fill="none"/>
 </svg>

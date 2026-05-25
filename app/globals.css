@@ -49,6 +49,11 @@ a {
   text-decoration: none;
 }
 
+/* Offset anchor scroll for sticky header */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
 ::selection {
   background: rgba(255, 193, 7, 0.3);
 }

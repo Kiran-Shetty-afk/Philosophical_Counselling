@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { AboutSection } from "@/components/sections/about-section";
+
+export const metadata: Metadata = {
+  title: "Benna Philosophical Counselling — Clarity, Meaning, and Reflective Living",
+  description:
+    "A modern philosophical counselling practice helping people find clarity, resilience, and meaning through reflective conversation.",
+};
 import { ApproachSection } from "@/components/sections/approach-section";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { ContactSection } from "@/components/sections/contact-section";

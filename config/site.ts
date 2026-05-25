@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Benna Philosophical Counselling",
   description:
     "A modern philosophical counselling practice helping people find clarity, resilience, and meaning through reflective conversation.",
-  url: "https://github.com/Kiran-Shetty-afk/Philosophical_Counselling",
+  url: "https://benna-philosophy.com",
   navItems: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
