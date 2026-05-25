@@ -10,7 +10,7 @@ export default function AdminBlogPage() {
   return (
     <AdminShell
       title="Blog management"
-      description="This separate admin area is exactly where publishing controls should live. Right now it scaffolds the content surface; next it can connect to create, edit, draft, and publish flows."
+      description="Create, edit, draft, and publish articles from this workspace. Changes here are reflected on the public blog."
     >
       <div className="mb-6 flex flex-col gap-4 rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -18,7 +18,7 @@ export default function AdminBlogPage() {
             Content publishing workspace
           </p>
           <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-            Separate from the public blog and ready to evolve into a real editorial flow.
+            Manage all blog posts from one place. Use the editor to draft, update, and publish articles.
           </p>
         </div>
         <Link

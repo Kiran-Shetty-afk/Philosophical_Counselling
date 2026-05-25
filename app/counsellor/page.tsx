@@ -3,11 +3,7 @@ import { CheckCircle2, GraduationCap, Sparkles } from "lucide-react";
 
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { PageHero } from "@/components/sections/page-hero";
-import {
-  AnimatedSection,
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/ui/animated-section";
+import { AnimatedSection } from "@/components/ui/animated-section";
 import { counsellorProfile } from "@/config/site";
 
 export const metadata: Metadata = {

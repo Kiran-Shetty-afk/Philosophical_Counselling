@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { AppointmentForm } from "@/components/forms/appointment-form";
 import { PageHero } from "@/components/sections/page-hero";
 import {
@@ -5,6 +6,12 @@ import {
   appointmentSlots,
   sessionPackages,
 } from "@/config/site";
+
+export const metadata: Metadata = {
+  title: "Book a Session",
+  description:
+    "Request a philosophical counselling session — choose your session type, preferred time, and share a little context.",
+};
 
 export default function BookSessionPage() {
   return (

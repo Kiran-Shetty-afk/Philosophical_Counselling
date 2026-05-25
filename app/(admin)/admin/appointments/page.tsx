@@ -6,7 +6,7 @@ export default function AdminAppointmentsPage() {
   return (
     <AdminShell
       title="Appointments"
-      description="Review booking requests, confirm sessions, and keep the Phase 1 booking workflow organized from a single queue."
+      description="Review booking requests, confirm or cancel sessions, and keep notes on each client from a single organised queue."
     >
       <AppointmentsPanel initialAppointments={[...adminAppointments]} />
     </AdminShell>

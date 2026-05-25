@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/contact-form";
 import { ContactSection } from "@/components/sections/contact-section";
 import { PageHero } from "@/components/sections/page-hero";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Reach out to Benna Philosophical Counselling for a confidential first enquiry. We respond with care and without pressure.",
+};
 
 export default function ContactPage() {
   return (

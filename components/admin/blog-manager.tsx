@@ -181,7 +181,7 @@ export function BlogManager({ initialPosts }: BlogManagerProps) {
               Edit article
             </h3>
             <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-              This is the exact place where create, edit, draft, and publish flows belong.
+              Update the fields below and use the action buttons to save, draft, or publish.
             </p>
           </div>
 
