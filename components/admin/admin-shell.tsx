@@ -55,11 +55,11 @@ export function AdminShell({
 
           <div className="mt-8 rounded-[1.5rem] border border-[var(--color-border)] bg-[var(--color-surface-muted)] p-4">
             <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-              Phase 1 scaffold
+              Admin workspace
             </p>
             <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-              Layout and management surfaces are ready. Auth and database wiring
-              can connect here next without reworking the structure.
+              Manage appointments, enquiries, blog content, and testimonials
+              from one controlled workspace.
             </p>
           </div>
 

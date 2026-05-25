@@ -94,9 +94,8 @@ export function AppointmentForm() {
           Reserve a session request
         </h2>
         <p className="mt-4 text-base leading-8 text-[var(--color-text-secondary)]">
-          Choose the kind of session you need, select a preferred time, and
-          share a little context. This Phase 1 flow is ready for real backend
-          persistence next.
+          Choose the kind of session you need, select a preferred date and time,
+          and share a little context. We will follow up to confirm your booking.
         </p>
       </div>
 
