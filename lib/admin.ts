@@ -91,6 +91,7 @@ export const adminTestimonials = testimonials.map((item, index) => ({
 export const adminNavItems = [
   { label: "Dashboard", href: "/admin/dashboard" },
   { label: "Appointments", href: "/admin/appointments" },
+  { label: "Availability", href: "/admin/availability" },
   { label: "Enquiries", href: "/admin/enquiries" },
   { label: "Blog", href: "/admin/blog" },
   { label: "Testimonials", href: "/admin/testimonials" },

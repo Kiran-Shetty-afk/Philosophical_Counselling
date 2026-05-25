@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+
 import { ContactForm } from "@/components/forms/contact-form";
-import { ContactSection } from "@/components/sections/contact-section";
 import { PageHero } from "@/components/sections/page-hero";
+import { CtaBanner } from "@/components/sections/cta-banner";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -22,7 +23,14 @@ export default function ContactPage() {
           <ContactForm />
         </div>
       </section>
-      <ContactSection />
+      <CtaBanner
+        title="Prefer to book directly?"
+        description="If you already know what kind of support you need, you can request a session straight away. No pressure, no commitment required."
+        primaryLabel="Book a Session"
+        primaryHref="/book-session"
+        secondaryLabel="Read the FAQ"
+        secondaryHref="/faq"
+      />
     </>
   );
 }
