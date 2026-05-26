@@ -25,7 +25,7 @@ const footerLinks = {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--color-border)] bg-white/70">
+    <footer className="border-t border-[var(--color-border)] bg-white/70 print:hidden">
       {/* Newsletter banner */}
       <div className="border-b border-[var(--color-border)] bg-[linear-gradient(135deg,rgba(255,248,225,0.7),rgba(255,255,255,0.8))]">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 py-12 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
