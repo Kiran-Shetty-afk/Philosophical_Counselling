@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock, Sparkles } from "lucide-react";
+
+import { NewsletterForm } from "@/components/forms/newsletter-form";
 
 const footerLinks = {
   services: [
@@ -23,8 +25,31 @@ const footerLinks = {
 export function SiteFooter() {
   return (
     <footer className="border-t border-[var(--color-border)] bg-white/70">
+      {/* Newsletter banner */}
+      <div className="border-b border-[var(--color-border)] bg-[linear-gradient(135deg,rgba(255,248,225,0.7),rgba(255,255,255,0.8))]">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 py-12 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
+          <div className="max-w-md">
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-[var(--color-accent)]" />
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-text-secondary)]">
+                Stay connected
+              </p>
+            </div>
+            <h3 className="mt-3 text-xl font-semibold text-[var(--color-text-primary)] sm:text-2xl">
+              Wisdom, reflections &amp; practice updates
+            </h3>
+            <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
+              Thoughtful insights delivered to your inbox — no spam, unsubscribe anytime.
+            </p>
+          </div>
+          <div className="w-full max-w-md">
+            <NewsletterForm />
+          </div>
+        </div>
+      </div>
+
       <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:px-10">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* Brand column */}
           <div>
             <div className="flex items-center gap-3">

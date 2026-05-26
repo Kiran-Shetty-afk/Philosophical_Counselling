@@ -1,7 +1,8 @@
-import { CalendarCheck2, Mail, FileText, Star } from "lucide-react";
+import { CalendarCheck2, Mail, FileText, Star, Newspaper } from "lucide-react";
 
 import { getAllBlogPosts } from "@/lib/blog";
 import { testimonials } from "@/config/site";
+import { getActiveSubscriberCount } from "@/lib/newsletter-store";
 
 export const adminStats = [
   {
@@ -34,6 +35,14 @@ export const adminStats = [
     detail: "2 awaiting moderation",
     icon: Star,
     href: "/admin/testimonials",
+    trend: "neutral" as const,
+  },
+  {
+    label: "Newsletter",
+    value: String(getActiveSubscriberCount()),
+    detail: "Active subscribers",
+    icon: Newspaper,
+    href: "/admin/newsletter",
     trend: "neutral" as const,
   },
 ] as const;
@@ -93,6 +102,7 @@ export const adminNavItems = [
   { label: "Appointments", href: "/admin/appointments" },
   { label: "Availability", href: "/admin/availability" },
   { label: "Enquiries", href: "/admin/enquiries" },
+  { label: "Newsletter", href: "/admin/newsletter" },
   { label: "Daily Wisdom", href: "/admin/wisdom" },
   { label: "Blog", href: "/admin/blog" },
   { label: "Testimonials", href: "/admin/testimonials" },
