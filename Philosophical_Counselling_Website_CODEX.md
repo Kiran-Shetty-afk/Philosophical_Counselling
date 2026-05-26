@@ -1379,8 +1379,8 @@ Every detail matters:
 
 ---
 
-**Document Version**: 2.0 (Codex Format)
-**Last Updated**: May 21, 2026
+**Document Version**: 2.1 (Codex Format)
+**Last Updated**: May 26, 2026
 **Status**: Ready for Senior Developer Implementation
 
 
@@ -1730,6 +1730,56 @@ Every page has a `Metadata` export:
 
 ---
 
+## ✅ Newsletter Subscription System
+
+### Files
+- `lib/newsletter-store.ts` — server-side in-memory singleton
+- `app/api/newsletter/route.ts` — POST (subscribe) + GET (admin list)
+- `app/api/newsletter/[id]/route.ts` — PATCH (deactivate) + DELETE (hard remove)
+- `components/forms/newsletter-form.tsx` — client component
+- `components/admin/newsletter-panel.tsx` — admin panel
+- `app/(admin)/admin/newsletter/page.tsx` — admin page
+
+### Newsletter store logic
+- `addSubscriber()` — creates new or re-activates inactive subscriber
+- `findByEmail()` — case-insensitive email lookup
+- `removeSubscriber()` — soft-deactivate (sets `active: false`)
+- `deleteSubscriber()` — hard delete from store
+- `getActiveSubscriberCount()` — used in admin dashboard stats
+- `generateId()` — generates `NL-` prefixed unique IDs
+
+### NewsletterForm features
+- Email validation: client-side regex + server-side check
+- Loading state: spinner + disabled button
+- Success state: checkmark + green confirmation banner
+- Already subscribed: amber info banner (no duplicate)
+- Error state: red alert with message
+- Auto-reset: status clears after 5 seconds
+- Responsive: stacks on mobile, inline on desktop
+
+### Footer integration
+- Newsletter banner added above main footer content
+- Warm gradient background with `Sparkles` icon eyebrow
+- Two-column layout: headline/copy left, form right
+- `md` breakpoint: side-by-side; below: stacked
+- Footer grid updated to `sm:grid-cols-2` for better tablet layout
+
+### Admin panel features
+- 3 stat cards: Total Subscribers, Active, Unsubscribed
+- Search by email with icon input
+- Filter pills: All / Active / Inactive
+- Responsive table: email, date, status badge, action buttons
+- Deactivate (soft) and Delete (hard) per subscriber
+- Loading states on all async actions
+- Empty state with icon and contextual message
+
+### Admin integration
+- `adminNavItems` — Newsletter link added between Enquiries and Daily Wisdom
+- `adminStats` — Newsletter card with `Newspaper` icon, live active count
+- Admin shell description updated to mention newsletter
+
+---
+
 ## ✅ Known limitations (Phase 1)
 
 | Item | Status |
@@ -1738,7 +1788,7 @@ Every page has a `Metadata` export:
 | No email notifications | Booking/contact confirmations are UI-only |
 | No user accounts | Clients cannot log in or view their bookings |
 | No payment processing | Session packages are informational only |
-| No newsletter | Subscription form not yet built |
+| ~~No newsletter~~ | ✅ Newsletter subscription system built (form + API + admin panel) |
 | Blog images are SVGs | No real photography — placeholder illustrations |
 | Counsellor avatar | Gradient circle placeholder — no real photo |
 
@@ -1757,3 +1807,4 @@ Every page has a `Metadata` export:
 | Daily Wisdom | Wisdom store, API, admin panel, hero card integration |
 | Hero restore | Original hero card style, wisdom from store, no refresh button |
 | Final | README + CODEX updated, all changes documented |
+| Newsletter | Full subscription system: form, API, admin panel, footer banner |
