@@ -36,6 +36,34 @@ export default function ResourcesPage() {
         description="A growing set of guides, essays, and exercises designed to support the work between sessions and encourage deeper self-understanding."
       />
 
+      {/* Featured Session Preparation Banner */}
+      <section className="px-5 pt-6 pb-2 sm:px-8 lg:px-10">
+        <div className="mx-auto w-full max-w-7xl">
+          <AnimatedSection>
+            <div className="flex flex-col gap-6 rounded-[2rem] border border-[var(--color-border-strong)] bg-white/70 p-8 md:flex-row md:items-center md:justify-between shadow-[0_16px_40px_rgba(44,62,80,0.04)]">
+              <div className="max-w-2xl">
+                <span className="inline-flex rounded-full bg-[var(--color-surface-highlight)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-success)]">
+                  First Session?
+                </span>
+                <h2 className="mt-3 text-2xl font-semibold text-[var(--color-text-primary)]">
+                  Preparation &amp; Before-Session Guide
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">
+                  Before your first dialogue, read our quiet guide on how to prepare your space, set your mindset, and download/print your session checklist.
+                </p>
+              </div>
+              <a
+                href="/before-session"
+                className="inline-flex shrink-0 items-center justify-center rounded-full bg-[var(--gradient-brand)] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:shadow-md hover:-translate-y-0.5"
+              >
+                View the Guide
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       <section className="px-5 py-10 sm:px-8 lg:px-10">
         <div className="mx-auto w-full max-w-7xl">
           {/* Category filter pills */}

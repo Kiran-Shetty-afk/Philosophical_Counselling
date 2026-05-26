@@ -1379,9 +1379,9 @@ Every detail matters:
 
 ---
 
-**Document Version**: 2.1 (Codex Format)
+**Document Version**: 2.2 (Codex Format)
 **Last Updated**: May 26, 2026
-**Status**: Ready for Senior Developer Implementation
+**Status**: Phase 1 Fully Completed
 
 
 ---
@@ -1780,6 +1780,29 @@ Every page has a `Metadata` export:
 
 ---
 
+## ✅ Phase 1 Content Pages
+
+### Before Session Guide (`/before-session`)
+- Comprehensive preparation guide page with interactive checklist for setting up quiet space, notebook, starting questions, and mental transition.
+- Calming guidelines covering unhurried dialogue, non-judgmental space, and collaborative inquiry.
+- Print-friendly layout stylesheet (`@media print`) that removes header, footer, and CTA banners for clean physical/PDF printing.
+- Action button triggering `window.print()` for instant saving/printing.
+- Prominent featured banner added on `/resources` page directing users to the guide.
+
+### Privacy Policy (`/privacy`)
+- Professional, GDPR-compliant policy detailing our strict confidentiality commitment.
+- Documents minimal data collection (contact form, newsletter, appointment requests), security practices, and 90-day soft delete retention buffers.
+- Outlines clear user rights to inspect, update, or permanently delete personal database records.
+- Footer links corrected to point directly to `/privacy`.
+
+### Terms of Service (`/terms`)
+- Detailed terms defining the reflective/educational scope of philosophical counselling.
+- Strict 24-hour rescheduling/cancellation policy, late cancellation forfeiture, and 15-minute no-show rules.
+- Fee terms and package expiration periods (Single: 3 months, 5-Session: 6 months, 10-Session: 12 months).
+- Footer links corrected to point directly to `/terms`.
+
+---
+
 ## ✅ Known limitations (Phase 1)
 
 | Item | Status |
@@ -1808,3 +1831,4 @@ Every page has a `Metadata` export:
 | Hero restore | Original hero card style, wisdom from store, no refresh button |
 | Final | README + CODEX updated, all changes documented |
 | Newsletter | Full subscription system: form, API, admin panel, footer banner |
+| Content pages | Complete Phase 1 pages (Before Session, Privacy, Terms) and integrations |

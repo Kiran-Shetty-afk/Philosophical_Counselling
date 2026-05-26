@@ -14,6 +14,7 @@ const footerLinks = {
     { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
     { label: "Resources", href: "/resources" },
+    { label: "Preparation Guide", href: "/before-session" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "FAQ", href: "/faq" },
   ],
@@ -149,13 +150,13 @@ export function SiteFooter() {
           </p>
           <div className="flex flex-wrap gap-5">
             <Link
-              href="/contact"
+              href="/privacy"
               className="transition hover:text-[var(--color-text-primary)]"
             >
               Privacy
             </Link>
             <Link
-              href="/contact"
+              href="/terms"
               className="transition hover:text-[var(--color-text-primary)]"
             >
               Terms
